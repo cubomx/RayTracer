@@ -1,36 +1,34 @@
-/**
- *  2019 - Universidad Panamericana 
- *  All Rights Reserved
- */
 package edu.up.isgc.raytracer.objects;
 
 import edu.up.isgc.raytracer.Intersection;
 import edu.up.isgc.raytracer.Ray;
 import edu.up.isgc.raytracer.Vector3D;
-import java.awt.Color;
+import edu.up.isgc.raytracer.tools.Material;
 
-/**
- *
- * @author Jafet
- */
+
 public class Sphere extends Object3D {
 
-    private float radius;
+    private double radius;
 
-    public Sphere(Vector3D center, float radius, Color color) {
-        super(center, color);
+    public Sphere(Vector3D center, double radius, Material mat) {
+        super(center, mat);
         setRadius(radius);
     }
 
-    public float getRadius() {
+    public double getRadius() {
         return radius;
     }
 
-    public void setRadius(float radius) {
+    public void setRadius(double radius) {
         this.radius = radius;
     }
+    
+    /** Obtain if the ray crashes into the sphere
+     * @param Ray ray
+     * return Intersection
+     */
 
-    public Intersection getIntersection(Ray ray, Camera cam) {
+    public Intersection getIntersection(Ray ray) {
         double distance = -1;
         Vector3D normal = Vector3D.ZERO();
         Vector3D position = Vector3D.ZERO();
@@ -53,6 +51,6 @@ public class Sphere extends Object3D {
             return null;
         }
         
-        return new Intersection(position, distance, normal, this);
+        return new Intersection(position, distance, normal, this, null);
     }
 }

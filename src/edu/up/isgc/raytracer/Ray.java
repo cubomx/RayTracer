@@ -1,13 +1,5 @@
-/**
- *  2019 - Universidad Panamericana 
- *  All Rights Reserved
- */
 package edu.up.isgc.raytracer;
 
-/**
- *
- * @author Jafet
- */
 public class Ray {
 
     private Vector3D origin;

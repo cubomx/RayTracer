@@ -1,13 +1,5 @@
-/**
- *  2019 - Universidad Panamericana 
- *  All Rights Reserved
- */
 package edu.up.isgc.raytracer;
 
-/**
- *
- * @author Jafet
- */
 public class Vector3D {
 
     private static final Vector3D ZERO = new Vector3D(0.0, 0.0, 0.0);
@@ -18,6 +10,7 @@ public class Vector3D {
         setY(y);
         setZ(z);
     }
+
     public static double dotProduct(Vector3D vectorA, Vector3D vectorB) {
         return (vectorA.x * vectorB.x) + (vectorA.y * vectorB.y) + (vectorA.z * vectorB.z);
     }
@@ -77,7 +70,6 @@ public class Vector3D {
     public String toString() {
         return "(" + getX() + ", " + getY() + ", " + getZ() + ")";
     }
-
     
     public Vector3D clone(){
         return new Vector3D(getX(), getY(), getZ());

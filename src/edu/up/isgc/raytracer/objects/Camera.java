@@ -1,52 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.up.isgc.raytracer.objects;
 
 import edu.up.isgc.raytracer.Intersection;
 import edu.up.isgc.raytracer.Ray;
 import edu.up.isgc.raytracer.Vector3D;
-import java.awt.Color;
 
-/**
- *
- * @author Jafet
- */
 public class Camera extends Object3D {
 	// 0 is fovh
 	// 1 is fovv
 	private float[] fieldOfView = new float[2];
 	private float defaultZ = 15f;
 	private int[] resolution;
-	private float near;
+	private float[] nearFarPlanes = new float[2];
 
-	public float getNear() {
-		return near;
-	}
-
-	public void setNear(float near) {
-		this.near = near;
-	}
-
-	public float getFar() {
-		return far;
-	}
-
-	public void setFar(float far) {
-		this.far = far;
-	}
-
-	private float far;
-
-	public Camera(Vector3D position, float fieldOfViewHorizontal, float fieldOfViewVertical, int widthResolution, int heightResolution, float near, float far) {
-		super(position, Color.black);
+	public Camera(Vector3D position, float fieldOfViewHorizontal, float fieldOfViewVertical, int widthResolution, int heightResolution, float nearPlane, float farPlane){
+		super(position, null);
 		setFieldOfViewHorizontal(fieldOfViewHorizontal);
 		setFieldOfViewVertical(fieldOfViewVertical);
 		setResolution(new int[] { widthResolution, heightResolution });
-		setFar(far);
-		setNear(near);
+		setNearFarPlanes(new float[]{nearPlane, farPlane});
 	}
 
 	public float getDefaultZ() {
@@ -84,6 +55,12 @@ public class Camera extends Object3D {
 	public float[] getFieldOfView() {
 		return fieldOfView;
 	}
+	
+	/**
+	 * Depending of the field of view it calculates all the vectors in which
+	 * the rays are going to represent every pixel.
+	 * @return Vector[][]
+	 */
 
 	public Vector3D[][] calculatePositionsToRay() {
 		float angleMaxX = 90 - (getFieldOfViewHorizontal() / 2f);
@@ -110,9 +87,17 @@ public class Camera extends Object3D {
 
 		return positions;
 	}
+	
+	public float[] getNearFarPlanes() {
+        return nearFarPlanes;
+    }
+
+    public void setNearFarPlanes(float[] nearFarPlanes) {
+        this.nearFarPlanes = nearFarPlanes;
+    }
 
 	@Override
-	public Intersection getIntersection(Ray ray, Camera cam) {
-		return new Intersection(Vector3D.ZERO(), -1, Vector3D.ZERO(), null);
+	public Intersection getIntersection(Ray ray) {
+		return new Intersection(Vector3D.ZERO(), -1, Vector3D.ZERO(), null, null);
 	}
 }
